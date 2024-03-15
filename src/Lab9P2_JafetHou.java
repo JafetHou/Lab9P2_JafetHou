@@ -1,4 +1,15 @@
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+
 public class Lab9P2_JafetHou extends javax.swing.JFrame {
 
     /**
@@ -7,12 +18,12 @@ public class Lab9P2_JafetHou extends javax.swing.JFrame {
     public Lab9P2_JafetHou() {
         initComponents();
         this.setLocationRelativeTo(null);
-        //ab.setAvanzar(false);
+        
         Hora h=new Hora(jl_hora, jl_fecha);
         Thread tiempo = new Thread(h);
         tiempo.start();   
         
-        ab=new Barra(jpb_barra);
+        ab=new Barra(jpb_barra, jta_Archivo);
 
     }
 
@@ -152,6 +163,11 @@ public class Lab9P2_JafetHou extends javax.swing.JFrame {
         jb_guardar.setBackground(new java.awt.Color(204, 204, 204));
         jb_guardar.setForeground(new java.awt.Color(0, 0, 0));
         jb_guardar.setText("Guardar");
+        jb_guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_guardarMouseClicked(evt);
+            }
+        });
         jPanel1.add(jb_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 370, -1, -1));
 
         jpb_barra.setBackground(new java.awt.Color(204, 204, 204));
@@ -181,14 +197,79 @@ public class Lab9P2_JafetHou extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_subirArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_subirArchivoMouseClicked
-    
-        ab.start();
-        if(jpb_barra.getValue()==100000000){
-                    
-                //=false;
-            }             
-        //ab.setAvanzar(true);
+        jpb_barra.setValue(0);
+        boolean term = false;
+        File arch = null;
+        jta_Archivo.setText("");
+        
+        try {
+            
+            JFileChooser chooser = new JFileChooser("./");
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de Texto", "txt");
+            chooser.setFileFilter(filtro);   
+            
+            int seleccion = chooser.showOpenDialog(this);
+            if (seleccion == JFileChooser.APPROVE_OPTION){
+                arch=chooser.getSelectedFile();
+                ab.setArch(arch);
+                ab.start();
+            }
+            
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            
+        }
     }//GEN-LAST:event_jb_subirArchivoMouseClicked
+
+    private void jb_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_guardarMouseClicked
+        
+        JFileChooser archivo = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter( "Archivos de Texto", "txt");
+        archivo.addChoosableFileFilter(filtro); 
+        int seleccion = archivo.showSaveDialog(this);    
+        
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            
+             try {
+                 
+                  File fichero=null;
+                  
+                if (archivo.getFileFilter().getDescription().equals( "Archivos de Texto")) {
+                    
+                    fichero = new File(archivo.getSelectedFile().getPath()+".txt");
+                    
+                }else{
+                    
+                    fichero = archivo.getSelectedFile();
+                    
+                }   
+                
+                fw = new FileWriter(fichero);
+                bw = new BufferedWriter(fw);
+                bw.write(jta_Archivo.getText());
+                jta_Archivo.setText("");
+                bw.flush();         
+                JOptionPane.showMessageDialog(this, "Archivo guardado!!");  
+                
+            } catch (Exception e) {
+                
+                e.printStackTrace();
+                
+            }
+            try {
+                
+                bw.close();
+                fw.close();
+                
+            } catch (IOException ex) {
+
+            }                     
+        }
+    }//GEN-LAST:event_jb_guardarMouseClicked
 
     /**
      * @param args the command line arguments
