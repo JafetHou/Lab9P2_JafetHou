@@ -1,12 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
-/**
- *
- * @author zenot
- */
 public class Lab9P2_JafetHou extends javax.swing.JFrame {
 
     /**
@@ -14,6 +6,14 @@ public class Lab9P2_JafetHou extends javax.swing.JFrame {
      */
     public Lab9P2_JafetHou() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        //ab.setAvanzar(false);
+        Hora h=new Hora(jl_hora, jl_fecha);
+        Thread tiempo = new Thread(h);
+        tiempo.start();   
+        
+        ab=new Barra(jpb_barra);
+
     }
 
     /**
@@ -30,6 +30,8 @@ public class Lab9P2_JafetHou extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jl_hora = new javax.swing.JLabel();
+        jl_fecha = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -37,7 +39,8 @@ public class Lab9P2_JafetHou extends javax.swing.JFrame {
         jta_Archivo = new javax.swing.JTextArea();
         jb_subirArchivo = new javax.swing.JButton();
         jb_guardar = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        jpb_barra = new javax.swing.JProgressBar();
+        jl_nube = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 255, 204));
@@ -48,7 +51,7 @@ public class Lab9P2_JafetHou extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Bienvenido");
 
@@ -60,52 +63,72 @@ public class Lab9P2_JafetHou extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Hora Actual:");
 
+        jl_hora.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jl_hora.setForeground(new java.awt.Color(0, 0, 0));
+        jl_hora.setText("00:00:00");
+
+        jl_fecha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jl_fecha.setForeground(new java.awt.Color(0, 0, 0));
+        jl_fecha.setText("dd/MM/YYYY");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(14, 14, 14))))
+                        .addGap(14, 14, 14))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jl_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jl_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(103, 103, 103)
+                .addGap(71, 71, 71)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(38, 38, 38)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jl_fecha)
+                .addGap(54, 54, 54)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jl_hora)
+                .addContainerGap(236, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 550));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 570));
 
         jLabel3.setFont(new java.awt.Font("Wide Latin", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Boroa Cloud");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 280, 60));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 280, 60));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Subiendo Archivo:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Archivo");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 170, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, -1, -1));
 
         jta_Archivo.setBackground(new java.awt.Color(204, 204, 204));
         jta_Archivo.setColumns(20);
@@ -113,35 +136,59 @@ public class Lab9P2_JafetHou extends javax.swing.JFrame {
         jta_Archivo.setRows(5);
         jScrollPane1.setViewportView(jta_Archivo);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 430, 270));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 430, 270));
 
         jb_subirArchivo.setBackground(new java.awt.Color(204, 204, 204));
         jb_subirArchivo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jb_subirArchivo.setForeground(new java.awt.Color(0, 0, 0));
         jb_subirArchivo.setText("Subir Archivo");
-        jPanel1.add(jb_subirArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 120, -1));
+        jb_subirArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_subirArchivoMouseClicked(evt);
+            }
+        });
+        jPanel1.add(jb_subirArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 120, -1));
 
         jb_guardar.setBackground(new java.awt.Color(204, 204, 204));
         jb_guardar.setForeground(new java.awt.Color(0, 0, 0));
         jb_guardar.setText("Guardar");
-        jPanel1.add(jb_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 490, -1, -1));
-        jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 340, 20));
+        jPanel1.add(jb_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 370, -1, -1));
+
+        jpb_barra.setBackground(new java.awt.Color(204, 204, 204));
+        jpb_barra.setForeground(new java.awt.Color(255, 204, 102));
+        jpb_barra.setMaximum(10000000);
+        jPanel1.add(jpb_barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 340, 20));
+
+        jl_nube.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nubepng.png"))); // NOI18N
+        jPanel1.add(jl_nube, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, -110, 530, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 827, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jb_subirArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_subirArchivoMouseClicked
+    
+        ab.start();
+        if(jpb_barra.getValue()==100000000){
+                    
+                //=false;
+            }             
+        //ab.setAvanzar(true);
+    }//GEN-LAST:event_jb_subirArchivoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -187,10 +234,14 @@ public class Lab9P2_JafetHou extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jb_guardar;
     private javax.swing.JButton jb_subirArchivo;
+    private javax.swing.JLabel jl_fecha;
+    private javax.swing.JLabel jl_hora;
+    private javax.swing.JLabel jl_nube;
+    private javax.swing.JProgressBar jpb_barra;
     private javax.swing.JTextArea jta_Archivo;
     // End of variables declaration//GEN-END:variables
+Barra ab;
 }
